@@ -47,7 +47,7 @@ namespace AddressBookCreationUser
             AddNewUser();
             UserData newuser = new UserData("");
             newuser.FirstName = ("ivan");
-            newuser.SecondName = ("iv");
+            newuser.SecondName = ("ivanov");
             FillUserName(newuser);
             SubmitUserCreation();
             BackToHomePage();
