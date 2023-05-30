@@ -4,30 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AddressBookFirstTest
+namespace AddressBookTests
 {
     internal class AccountData
     {
-        private string username;
+        private string login;
         private string password;
 
-        public AccountData(string username, string password)
+        public AccountData(string login, string password)
         {
-            this.username = username;
+            this.login = login;
             this.password = password;
             
         }
 
-        public string Username
+        public string Login
         {
             get
             {
-                return username;
+                return login;
             }
         
         set 
             {
-            username = value;
+                login = value;
             }
 
         }
