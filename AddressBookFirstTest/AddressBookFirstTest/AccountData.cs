@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace AddressBookTests
 {
-    internal class AccountData
+   public  class AccountData 
+
     {
         private string login;
         private string password;
