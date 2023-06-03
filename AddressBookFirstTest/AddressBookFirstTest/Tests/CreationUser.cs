@@ -11,16 +11,15 @@ namespace AddressBookTests
         [Test]
         public void AddressBookCreationUser()
         {
-            OpenHomePage();
-            Login(new AccountData("admin", "secret"));
-            AddNewUser();
+            app.Navigator.GoToHomePage();
+            app.Auth.Login(new AccountData("admin", "secret"));
+            app.User.AddNewUser();
             UserData newuser = new UserData("");
             newuser.FirstName = ("ivan");
             newuser.SecondName = ("ivanov");
-            FillUserName(newuser);
-            SubmitUserCreation();
-            BackToHomePage();
-            Logout();
+            app.User.FillUserName(newuser);
+            app.User.SubmitUserCreation();
+            app.Auth.Logout();
         }
     }
 }
