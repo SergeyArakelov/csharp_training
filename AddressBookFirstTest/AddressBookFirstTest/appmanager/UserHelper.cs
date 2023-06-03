@@ -7,30 +7,37 @@ using System.Threading.Tasks;
 
 namespace AddressBookTests
 {
-    public class UserHelper
+    public class UserHelper : HelperBase
     {
-        private IWebDriver driver;
-        public UserHelper(IWebDriver driver)
+        
+        public UserHelper(ApplicationManager manager) :
+        base(manager)
         {
-            this.driver = driver;
+           
 
         }
-        public void AddNewUser()
+        public UserHelper Create(UserData newuser)
         {
-            driver.FindElement(By.LinkText("add new")).Click();
+            manager.Navigator.GoToUserPage();
+            FillUserName(newuser);
+            SubmitUserCreation();
+            return this;
         }
+       
 
-        public void FillUserName(UserData newuser)
+        public UserHelper FillUserName(UserData newuser)
         {
             driver.FindElement(By.Name("firstname")).Click();
             driver.FindElement(By.Name("firstname")).Clear();
             driver.FindElement(By.Name("firstname")).SendKeys(newuser.FirstName);
             driver.FindElement(By.Name("middlename")).Clear();
             driver.FindElement(By.Name("middlename")).SendKeys(newuser.SecondName);
+            return this;
         }
-        public void SubmitUserCreation()
+        public UserHelper SubmitUserCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
+            return this;
         }
     }
 }

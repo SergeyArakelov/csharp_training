@@ -17,19 +17,26 @@ namespace AddressBookTests
         protected NavigationHelper navigationHelper;
         protected GroupHelper groupHelper;
         protected UserHelper userHelper;
+        
 
         public ApplicationManager()
             {
-            driver = new ChromeDriver();
-            baseURL = "http://localhost/addressbook";
-            
+            driver =new ChromeDriver();
+            baseURL = "http://localhost/addressbook/";
 
-            loginHelper = new LoginHelper(driver);
-            navigationHelper = new NavigationHelper(driver, baseURL);
-            groupHelper = new GroupHelper(driver);
-            userHelper = new UserHelper(driver);
+            loginHelper = new LoginHelper(this);
+            navigationHelper = new NavigationHelper(this, baseURL);
+            groupHelper = new GroupHelper(this);
+            userHelper = new UserHelper(this);
         }
 
+        public IWebDriver Driver 
+        { 
+            get 
+            { 
+                return driver; 
+            } 
+        } 
         public void Stop()
         {
             try

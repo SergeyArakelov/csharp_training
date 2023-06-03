@@ -11,19 +11,27 @@ namespace AddressBookTests
     {
         
         private string baseURL;
-        public NavigationHelper(IWebDriver driver, string baseURL) :
-        base(driver)
+        public NavigationHelper(ApplicationManager manager, string baseURL) :
+        base(manager)
         { 
-            this.baseURL = baseURL;
+            this.baseURL = baseURL; 
         }
-        public void GoToGroupPage()
+        public NavigationHelper GoToGroupPage()
         {
 
             driver.FindElement(By.LinkText("groups")).Click();
+            return this;
         }
-        public void GoToHomePage()
+        public NavigationHelper GoToHomePage()
         {
             driver.Navigate().GoToUrl(baseURL);
+            return this;
+        }
+
+        public NavigationHelper GoToUserPage() 
+        {
+            driver.FindElement(By.LinkText("add new")).Click();
+            return this;
         }
        
     }
