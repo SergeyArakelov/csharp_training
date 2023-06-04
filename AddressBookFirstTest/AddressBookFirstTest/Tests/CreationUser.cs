@@ -3,18 +3,18 @@ using NUnit.Framework;
 namespace AddressBookTests
 {
     [TestFixture]
-    public class CreationUser : TestBase
+    public class CreationUserTests : TestBase
     {
 
 
 
         [Test]
-        public void AddressBookCreationUser()
+        public void CreationUserTest()
         {
             
             UserData newuser = new UserData("");
-            newuser.FirstName = ("ivan");
-            newuser.SecondName = ("ivanov");
+            newuser.FirstName = ("petr");
+            newuser.SecondName = ("Petrov");
 
             app.User.Create(newuser);
         }
