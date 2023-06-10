@@ -2,7 +2,7 @@ using NUnit.Framework;
 
 namespace AddressBookTests
 {
-    [TestFixture]
+    [SetUpFixture]
     public class CreationUserTests : TestBase
     {
 

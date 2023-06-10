@@ -50,11 +50,8 @@ namespace AddressBookTests
 
         public UserHelper FillUserName(UserData newuser)
         {
-            driver.FindElement(By.Name("firstname")).Click();
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(newuser.FirstName);
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(newuser.SecondName);
+            Type(By.Name("firstname"), newuser.FirstName);
+            Type(By.Name("lastname"), newuser.SecondName);
             return this;
         }
         public UserHelper SubmitUserCreation()
@@ -74,11 +71,8 @@ namespace AddressBookTests
         }
         public UserHelper FillUserForm(UserData modify)
         {
-            driver.FindElement(By.Name("company")).Click();
-            driver.FindElement(By.Name("company")).Clear();
-            driver.FindElement(By.Name("company")).SendKeys(modify.Company);
-            driver.FindElement(By.Name("email")).Clear();
-            driver.FindElement(By.Name("email")).SendKeys(modify.EMail);
+            Type(By.Name("company"), modify.Company);
+            Type(By.Name("email"), modify.EMail);
             return this;
         }
         public UserHelper SubmitUserModification()

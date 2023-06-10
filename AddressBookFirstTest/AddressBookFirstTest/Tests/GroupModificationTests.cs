@@ -12,8 +12,8 @@ namespace AddressBookTests
         {
 
             GroupData newData = new GroupData("zzz");
-            newData.Header = ("ttt");
-            newData.Footer = ("www");
+            newData.Header = null;
+            newData.Footer = null;
 
 
             app.Groups.Modify(1, newData);
