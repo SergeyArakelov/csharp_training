@@ -14,7 +14,7 @@ namespace AddressBookTests
         {
           
         }
-
+        public bool IsGroupExist => IsElementPresent(By.Name("selected[]"));
         public GroupHelper Create(GroupData group) 
         {
             manager.Navigator.GoToGroupPage();
@@ -24,19 +24,41 @@ namespace AddressBookTests
             ReturnToGroupPage();
             return this;
         }
-        public GroupHelper Remove(int v)
+        public void Remove()
         {
             manager.Navigator.GoToGroupPage();
 
-            SelectGroup(v);
+            if (!IsGroupExist) 
+            {
+                EmptyGroupCreation();            
+            }
+            
+            SelectGroup();
             RemoveGroup();
             ReturnToGroupPage();
-            return this;
+            
         }
-        public GroupHelper Modify(int v, GroupData newData)
+
+        public void EmptyGroupCreation()
+        {
+            
+            InitNewGroupCreation();
+            SubmitGroupCreation();
+            manager.Navigator.GoToGroupPage();
+
+        }
+
+       
+        
+
+        public GroupHelper Modify(GroupData newData)
         {
             manager.Navigator.GoToGroupPage();
-            SelectGroup(v);
+            if (!IsGroupExist)
+            {
+                EmptyGroupCreation();
+            }
+            SelectGroup();
             InitGroupModification();
             FillGroupForm(newData);
             SubmitGroupModification();
@@ -72,9 +94,9 @@ namespace AddressBookTests
             driver.FindElement(By.Name("delete")).Click();
             return this;
         }
-        public GroupHelper SelectGroup(int index)
+        public GroupHelper SelectGroup()
         {
-            driver.FindElement(By.XPath("//div[@id='content']/form/span[" + index + "]/input")).Click();
+            driver.FindElement(By.Name("selected[]")).Click();
             return this;
         }
         public GroupHelper ReturnToGroupPage()

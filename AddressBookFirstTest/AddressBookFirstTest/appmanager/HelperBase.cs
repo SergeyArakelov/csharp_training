@@ -21,6 +21,18 @@ namespace AddressBookTests
 
             }
         }
+        public bool IsElementPresent(By by)
+        {
+            try
+            {
+                driver.FindElement(by);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
     }
     
 }

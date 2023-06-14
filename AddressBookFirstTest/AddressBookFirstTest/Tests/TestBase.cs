@@ -4,18 +4,24 @@
 
 namespace AddressBookTests
 {
-  public  class TestBase
+    public class TestBase
     {
-        
+
         protected ApplicationManager app;
-        
+
         [SetUp]
         public void SetupTest()
         {
 
-            app = TestSuitFixture.app;
+            app = ApplicationManager.GetInstance();
 
         }
-        
+
+
+        [OneTimeTearDown]
+        public void StopApplicationManager()
+        {
+            ApplicationManager.Stop();
+        }
     }
 }

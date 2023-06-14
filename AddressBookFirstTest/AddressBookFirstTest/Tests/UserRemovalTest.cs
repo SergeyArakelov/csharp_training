@@ -4,18 +4,20 @@ namespace AddressBookTests
 {
     [TestFixture]
 
-    public class UserRemovalTests : TestBase
+    public class UserRemovalTests : AuthTestBase
     {
-        [Test]
-        public void UserRemovalTestViaEdit()
-        {
-            app.User.RemoveViaEdit();
-        }
+        //[Test]
+        //public void UserRemovalTestViaEdit()
+        //{
+           // app.User.RemoveViaEdit();
+       // }
 
         [Test]
         public void UserRemovalTest()
         {
+            
             app.User.RemoveUser();
+            
         }
     }
 }

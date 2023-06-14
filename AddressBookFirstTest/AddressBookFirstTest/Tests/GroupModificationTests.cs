@@ -4,7 +4,7 @@ using NUnit.Framework;
 namespace AddressBookTests
 {
     [TestFixture]
-    public class GroupModificationTests : TestBase
+    public class GroupModificationTests : AuthTestBase
     {
 
         [Test]
@@ -16,7 +16,8 @@ namespace AddressBookTests
             newData.Footer = null;
 
 
-            app.Groups.Modify(1, newData);
+            app.Groups.Modify(newData);
+            
 
         }
     }

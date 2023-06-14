@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AddressBookTests
@@ -17,9 +18,10 @@ namespace AddressBookTests
         protected NavigationHelper navigationHelper;
         protected GroupHelper groupHelper;
         protected UserHelper userHelper;
-        
 
-        public ApplicationManager()
+        private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
+
+        private ApplicationManager()
             {
             driver =new ChromeDriver();
             baseURL = "http://localhost/addressbook/";
@@ -30,6 +32,38 @@ namespace AddressBookTests
             userHelper = new UserHelper(this);
         }
 
+
+        public static void Stop() 
+        {
+            ApplicationManager.GetInstance().driver.Quit();
+              
+            
+        }
+        // ~ApplicationManager() 
+        //{
+        //    try
+        //    {
+        //        driver.Quit();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        // Ignore errors if unable to close the browser
+        //    }
+        //}
+
+        public static ApplicationManager GetInstance() 
+        {
+            if (! app.IsValueCreated) 
+            { 
+                ApplicationManager newInstance = new ApplicationManager();
+                app.Value = newInstance;
+                newInstance.Navigator.GoToHomePage();
+            }
+            return app.Value;
+        }
+
+        
+
         public IWebDriver Driver 
         { 
             get 
@@ -37,17 +71,7 @@ namespace AddressBookTests
                 return driver; 
             } 
         } 
-        public void Stop()
-        {
-            try
-            {
-                driver.Quit();
-            }
-            catch (Exception)
-            {
-                // Ignore errors if unable to close the browser
-            }
-        }
+        
 
         public LoginHelper Auth
         {

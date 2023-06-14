@@ -8,8 +8,8 @@ namespace AddressBookTests
 {
   public class UserData 
     {
-        internal string Company;
-        internal string EMail;
+        //internal string Company;
+        //internal string EMail;
         private string firstname = "";
         private string secondname = "";
 

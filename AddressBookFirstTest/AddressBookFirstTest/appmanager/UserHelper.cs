@@ -18,34 +18,64 @@ namespace AddressBookTests
            
 
         }
-        public UserHelper Create(UserData newuser)
+        public void Create(UserData newuser)
         {
             manager.Navigator.GoToUserPage();
             FillUserName(newuser);
             SubmitUserCreation();
-            return this;
+            
         }
 
-        public UserHelper Modify(UserData modify)
+        public bool IsUserExist => IsElementPresent(By.XPath("//img[@alt='Details']"));
+        
+
+        public void Modify(UserData modify)
         {
+            if (!IsUserExist) 
+            {
+                CreateEmptyUser();
+                manager.Navigator.GoToHomePage();
+
+            }
             InitUserModification();
             FillUserForm(modify);
             SubmitUserModification();
-            return this;
+            
+        }
 
-        }
-        public UserHelper RemoveViaEdit()
+        public void CreateEmptyUser()
         {
-            InitUserModification();
-            RemoveUserViaEdit();
-            return this;
+            manager.Navigator.GoToUserPage();
+            SubmitUserCreation();
         }
-        public UserHelper RemoveUser() 
+
+        public UserHelper FillUserForm(UserData modify)
         {
+        Type(By.Name("firstname"), modify.FirstName);
+         return this;
+        }
+
+        //public UserHelper RemoveViaEdit()
+        //{
+        //InitUserModification();
+        //RemoveUserViaEdit();
+        //return this;
+        //}
+
+       
+        public void RemoveUser()
+        {
+            if (!IsUserExist)
+            {
+                CreateEmptyUser();
+                manager.Navigator.GoToHomePage();
+
+            }
+            
             SelectUser();
             Remove();
             RemovalNotificationAccept();
-            return this;
+
         }
 
         public UserHelper FillUserName(UserData newuser)
@@ -64,26 +94,15 @@ namespace AddressBookTests
             driver.FindElement(By.Name("selected[]")).Click();
             return this;
         }
-        public UserHelper InitUserModification()
+        public void InitUserModification()
         {
             driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
-            return this;
+           
         }
-        public UserHelper FillUserForm(UserData modify)
-        {
-            Type(By.Name("company"), modify.Company);
-            Type(By.Name("email"), modify.EMail);
-            return this;
-        }
+        
         public UserHelper SubmitUserModification()
         {
             driver.FindElement(By.Name("update")).Click();
-            return this;
-        }
-
-        public UserHelper RemoveUserViaEdit()
-        {
-            driver.FindElement(By.XPath("//div[@id='content']/form[2]/input[2]")).Click();
             return this;
         }
 
@@ -100,3 +119,8 @@ namespace AddressBookTests
         }
     }
 }
+// public UserHelper RemoveUserViaEdit()
+//{
+//driver.FindElement(By.XPath("//div[@id='content']/form[2]/input[2]")).Click();
+//return this;
+//}

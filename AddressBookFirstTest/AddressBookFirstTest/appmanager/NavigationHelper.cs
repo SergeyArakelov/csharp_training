@@ -16,22 +16,31 @@ namespace AddressBookTests
         { 
             this.baseURL = baseURL; 
         }
-        public NavigationHelper GoToGroupPage()
+        public void GoToGroupPage()
         {
-
+            if (driver.Url == baseURL + "group.php"
+                && IsElementPresent(By.Name("new"))) 
+            {
+                return;
+            }
             driver.FindElement(By.LinkText("groups")).Click();
-            return this;
+            
         }
-        public NavigationHelper GoToHomePage()
+        public void GoToHomePage()
         {
+            if (driver.Url == baseURL)
+               
+            {
+                return;
+            }
             driver.Navigate().GoToUrl(baseURL);
-            return this;
+            
         }
 
-        public NavigationHelper GoToUserPage() 
+        public void GoToUserPage() 
         {
             driver.FindElement(By.LinkText("add new")).Click();
-            return this;
+            
         }
        
     }
