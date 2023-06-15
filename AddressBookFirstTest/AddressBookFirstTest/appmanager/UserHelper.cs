@@ -31,22 +31,16 @@ namespace AddressBookTests
 
         public void Modify(UserData modify)
         {
-            if (!IsUserExist) 
-            {
-                CreateEmptyUser();
-                manager.Navigator.GoToHomePage();
-
-            }
             InitUserModification();
             FillUserForm(modify);
-            SubmitUserModification();
-            
+            SubmitUserModification();  
         }
 
         public void CreateEmptyUser()
         {
             manager.Navigator.GoToUserPage();
             SubmitUserCreation();
+            manager.Navigator.GoToHomePage();
         }
 
         public UserHelper FillUserForm(UserData modify)
@@ -65,17 +59,9 @@ namespace AddressBookTests
        
         public void RemoveUser()
         {
-            if (!IsUserExist)
-            {
-                CreateEmptyUser();
-                manager.Navigator.GoToHomePage();
-
-            }
-            
             SelectUser();
             Remove();
             RemovalNotificationAccept();
-
         }
 
         public UserHelper FillUserName(UserData newuser)

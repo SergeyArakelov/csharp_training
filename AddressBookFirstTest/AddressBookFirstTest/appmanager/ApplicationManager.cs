@@ -88,7 +88,7 @@ namespace AddressBookTests
                 return navigationHelper;
             }
         }
-             public UserHelper User
+        public UserHelper User
         {
             get
             {

@@ -9,7 +9,10 @@ namespace AddressBookTests
         [Test]
         public void UserModificationTest()
         {
-            
+            if (!app.User.IsUserExist)
+            {
+                app.User.CreateEmptyUser();
+            }
             UserData modify = new UserData("");
             modify.FirstName = ("Vasiliy");
             //modify.EMail = ("Petrov@mic.com");

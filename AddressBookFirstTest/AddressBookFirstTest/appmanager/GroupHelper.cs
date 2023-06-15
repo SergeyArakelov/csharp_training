@@ -14,7 +14,7 @@ namespace AddressBookTests
         {
           
         }
-        public bool IsGroupExist => IsElementPresent(By.Name("selected[]"));
+       
         public GroupHelper Create(GroupData group) 
         {
             manager.Navigator.GoToGroupPage();
@@ -24,14 +24,10 @@ namespace AddressBookTests
             ReturnToGroupPage();
             return this;
         }
+
+        public bool IsGroupExist => IsElementPresent(By.Name("selected[]"));
         public void Remove()
         {
-            manager.Navigator.GoToGroupPage();
-
-            if (!IsGroupExist) 
-            {
-                EmptyGroupCreation();            
-            }
             
             SelectGroup();
             RemoveGroup();
@@ -53,11 +49,7 @@ namespace AddressBookTests
 
         public GroupHelper Modify(GroupData newData)
         {
-            manager.Navigator.GoToGroupPage();
-            if (!IsGroupExist)
-            {
-                EmptyGroupCreation();
-            }
+            
             SelectGroup();
             InitGroupModification();
             FillGroupForm(newData);
