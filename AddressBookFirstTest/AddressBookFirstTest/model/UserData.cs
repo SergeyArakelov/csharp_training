@@ -3,25 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace AddressBookTests
 {
-  public class UserData 
+  public class UserData : IEquatable<UserData>, IComparable<UserData>
     {
-        //internal string Company;
-        //internal string EMail;
+        // internal string Company;
+        // internal string EMail;
         private string firstname = "";
         private string secondname = "";
+        private string newuser;
+       
 
-        public UserData(string username)
-        {
-            firstname = firstname;
-            secondname = secondname;
-        }
-
-
-        
-        
         public string FirstName
         {
             get
@@ -43,6 +37,49 @@ namespace AddressBookTests
             {
                 secondname = value;
             }
+        }
+
+        public UserData(string newuser)
+        {
+            this.newuser = newuser;
+            // firstname = firstname;
+            // secondname = secondname;
+        }
+
+        public bool Equals(UserData other)
+        {
+            if (Object.ReferenceEquals(other, null))
+            {
+                return false;
+            }
+            if (Object.ReferenceEquals(this, null))
+            {
+                return true;
+            }
+            return FirstName == other.FirstName && SecondName == other.SecondName;
+
+
+
+        }
+        public override int GetHashCode()
+        {
+            return FirstName.GetHashCode() + SecondName.GetHashCode();
+        }
+        
+
+        public override string ToString()
+        {
+            return "firstName=" + FirstName + "secondName " + SecondName;
+        }
+
+        public  int CompareTo(UserData other)
+        {
+            if (Object.ReferenceEquals(other, null))
+            {
+                return 1;
+            }
+           
+            return FirstName.CompareTo(other.FirstName) + SecondName.CompareTo(other.SecondName);
         }
     }
 }

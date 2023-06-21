@@ -16,8 +16,15 @@ namespace AddressBookTests
             {
                 app.Groups.EmptyGroupCreation();
             }
+
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
             app.Groups.Remove();
-           
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            oldGroups.RemoveAt(0);
+
+            Assert.AreEqual(oldGroups, newGroups);
+
         }
     }
 }

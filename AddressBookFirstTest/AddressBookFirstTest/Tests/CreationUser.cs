@@ -1,4 +1,5 @@
-using NUnit.Framework;
+﻿using NUnit.Framework;
+using System.Security.Cryptography;
 
 namespace AddressBookTests
 {
@@ -13,10 +14,20 @@ namespace AddressBookTests
         {
             
             UserData newuser = new UserData("");
-            newuser.FirstName = ("petr");
-            newuser.SecondName = ("Petrov");
+            newuser.FirstName = "petr";
+            newuser.SecondName = "Petrov";
+
+            List<UserData> oldUsers = app.User.GetUserList();
 
             app.User.Create(newuser);
+
+            List<UserData> newUsers = app.User.GetUserList();
+            
+            oldUsers.Sort();
+            newUsers.Sort();
+            Assert.AreNotEqual(oldUsers, newUsers);
         }
+
+       
     }
 }

@@ -23,7 +23,8 @@ namespace AddressBookTests
             manager.Navigator.GoToUserPage();
             FillUserName(newuser);
             SubmitUserCreation();
-            
+            manager.Navigator.GoToHomePage();
+
         }
 
         public bool IsUserExist => IsElementPresent(By.XPath("//img[@alt='Details']"));
@@ -102,6 +103,27 @@ namespace AddressBookTests
         {
             driver.SwitchTo().Alert().Accept();
             return this;
+        }
+
+        public List<UserData> GetUserList()
+        {
+            List<UserData> users = new List<UserData>();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("table tr td:nth-child(n)"));
+            foreach (IWebElement element in elements)
+            {
+                users.Add(new UserData(element.Text));
+            }
+            return users;
+        }
+        public List<FirstNameData> GetFirstNameList()
+        {
+            List<FirstNameData> firstnames = new List<FirstNameData>();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr:nth-of-type(3) > td:nth-of-type(3)"));
+            foreach (IWebElement firstname in elements)
+            {
+                firstnames.Add(new FirstNameData(element.Text));
+            }
+            return firstnames;
         }
     }
 }
