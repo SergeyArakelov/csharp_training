@@ -38,13 +38,19 @@ namespace AddressBookTests
                 secondname = value;
             }
         }
+        
 
         public UserData(string newuser)
         {
             this.newuser = newuser;
-            // firstname = firstname;
-            // secondname = secondname;
+            firstname = firstname;
+            secondname = secondname;
         }
+       //public FirstName(string firstnames)
+       // {
+       //     this.firstname = firstnames;
+       // }
+
 
         public bool Equals(UserData other)
         {
@@ -78,8 +84,13 @@ namespace AddressBookTests
             {
                 return 1;
             }
-           
-            return FirstName.CompareTo(other.FirstName) + SecondName.CompareTo(other.SecondName);
+           if (SecondName == other.SecondName)
+            {
+                FirstName.CompareTo(other.FirstName);
+                 
+            }
+            return SecondName.CompareTo(other.SecondName);
+            
         }
     }
 }

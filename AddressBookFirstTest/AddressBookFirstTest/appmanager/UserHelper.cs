@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -105,27 +106,40 @@ namespace AddressBookTests
             return this;
         }
 
-        public List<UserData> GetUserList()
+        //public List<UserData> GetUserList()
+        //{
+        //    List<UserData> users = new List<UserData>();
+        //    ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr:nth-of-type(0) > td:nth-child(1)"));
+        //    foreach (IWebElement element in elements)
+        //    {
+        //        users.Add(new UserData(element.Text));
+        //    }
+        //    return users;
+        //}
+        public List<UserData> GetFirstNameList()
         {
-            List<UserData> users = new List<UserData>();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("table tr td:nth-child(n)"));
+            List<UserData> firstnames = new List<UserData>();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr:nth-of-type(3) > td:nth-of-type(3)"));
             foreach (IWebElement element in elements)
             {
-                users.Add(new UserData(element.Text));
-            }
-            return users;
-        }
-        public List<FirstNameData> GetFirstNameList()
-        {
-            List<FirstNameData> firstnames = new List<FirstNameData>();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr:nth-of-type(3) > td:nth-of-type(3)"));
-            foreach (IWebElement firstname in elements)
-            {
-                firstnames.Add(new FirstNameData(element.Text));
+                firstnames.Add(new UserData(element.Text));
             }
             return firstnames;
         }
+
+        public List<UserData> GetSecondNameList()
+        {
+            List<UserData> secondnames = new List<UserData>();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr:nth-of-type(2) > td:nth-of-type(2)"));
+            foreach (IWebElement element in elements)
+            {
+                secondnames.Add(new UserData(element.Text));
+            }
+            return secondnames;
+        }
     }
+
+   
 }
 // public UserHelper RemoveUserViaEdit()
 //{
