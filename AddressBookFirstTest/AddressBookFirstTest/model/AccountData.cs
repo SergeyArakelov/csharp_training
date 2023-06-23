@@ -9,44 +9,20 @@ namespace AddressBookTests
    public  class AccountData 
 
     {
-        private string login;
-        private string password;
+        
 
         public AccountData(string login, string password)
         {
-            this.login = login;
-            this.password = password;
+            Login = login;
+            Password = password;
             
         }
 
-        public string Login
-        {
-            get
-            {
-                return login;
-            }
+        public string Login { get; set; }
+       
+
+        public string Password { get; set; }
         
-        set 
-            {
-                login = value;
-            }
-
-        }
-
-        public string Password
-        {
-            get
-            {
-                return password;
-            }
-
-            set
-            {
-                password = value;
-            }
-
-        }
-
 
     }
 }

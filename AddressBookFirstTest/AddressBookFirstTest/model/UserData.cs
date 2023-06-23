@@ -9,50 +9,21 @@ namespace AddressBookTests
 {
   public class UserData : IEquatable<UserData>, IComparable<UserData>
     {
-        // internal string Company;
-        // internal string EMail;
-        private string firstname = "";
-        private string secondname = "";
-        private string newuser;
-       
-
-        public string FirstName
-        {
-            get
-            {
-                return firstname;
-            }
-            set
-            {
-                firstname = value;
-            }
-        }
-        public string SecondName
-        {
-            get
-            {
-                return secondname;
-            }
-            set
-            {
-                secondname = value;
-            }
-        }
         
-
-        public UserData(string newuser)
-        {
-            this.newuser = newuser;
-            firstname = firstname;
-            secondname = secondname;
-        }
-       //public FirstName(string firstnames)
-       // {
-       //     this.firstname = firstnames;
-       // }
+        public string FirstName { get; set; }
+        
+        public string SecondName { get; set; }
 
 
-        public bool Equals(UserData other)
+
+            public UserData(string username)
+            {
+            username = username;
+            }
+
+
+
+            public bool Equals(UserData other)
         {
             if (Object.ReferenceEquals(other, null))
             {

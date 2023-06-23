@@ -7,16 +7,17 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace AddressBookTests
 {
     public class UserHelper : HelperBase
     {
-        
+
         public UserHelper(ApplicationManager manager) :
         base(manager)
         {
-           
+
 
         }
         public void Create(UserData newuser)
@@ -29,13 +30,13 @@ namespace AddressBookTests
         }
 
         public bool IsUserExist => IsElementPresent(By.XPath("//img[@alt='Details']"));
-        
+
 
         public void Modify(UserData modify)
         {
             InitUserModification();
             FillUserForm(modify);
-            SubmitUserModification();  
+            SubmitUserModification();
         }
 
         public void CreateEmptyUser()
@@ -47,8 +48,8 @@ namespace AddressBookTests
 
         public UserHelper FillUserForm(UserData modify)
         {
-        Type(By.Name("firstname"), modify.FirstName);
-         return this;
+            Type(By.Name("firstname"), modify.FirstName);
+            return this;
         }
 
         //public UserHelper RemoveViaEdit()
@@ -58,7 +59,7 @@ namespace AddressBookTests
         //return this;
         //}
 
-       
+
         public void RemoveUser()
         {
             SelectUser();
@@ -85,9 +86,9 @@ namespace AddressBookTests
         public void InitUserModification()
         {
             driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
-           
+
         }
-        
+
         public UserHelper SubmitUserModification()
         {
             driver.FindElement(By.Name("update")).Click();
@@ -100,7 +101,7 @@ namespace AddressBookTests
             return this;
         }
 
-            public UserHelper RemovalNotificationAccept()
+        public UserHelper RemovalNotificationAccept()
         {
             driver.SwitchTo().Alert().Accept();
             return this;
@@ -108,38 +109,19 @@ namespace AddressBookTests
 
         //public List<UserData> GetUserList()
         //{
-        //    List<UserData> users = new List<UserData>();
-        //    ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr:nth-of-type(0) > td:nth-child(1)"));
-        //    foreach (IWebElement element in elements)
+        //    List<UserData> newusers = new List<UserData>();
+        //    ICollection<IWebElement> FirstName = driver.FindElements(By.CssSelector("tr > td:nth-of-type(3)"));
+        //    ICollection<IWebElement> SecondName = driver.FindElements(By.CssSelector("tr > td:nth-of-type(2)"));
+        //    for (int i = 0; i < newusers.Count; i++)
         //    {
-        //        users.Add(new UserData(element.Text));
+        //       // UserData newuser = new UserData(newuser(i));
+
+        //       // newusers.Add(newuser);
         //    }
-        //    return users;
+        //   // IList<IWebElement> cells = newuser.FindElements(By.TagName("td"));
+        //    return newusers;
         //}
-        public List<UserData> GetFirstNameList()
-        {
-            List<UserData> firstnames = new List<UserData>();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr:nth-of-type(3) > td:nth-of-type(3)"));
-            foreach (IWebElement element in elements)
-            {
-                firstnames.Add(new UserData(element.Text));
-            }
-            return firstnames;
-        }
-
-        public List<UserData> GetSecondNameList()
-        {
-            List<UserData> secondnames = new List<UserData>();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr:nth-of-type(2) > td:nth-of-type(2)"));
-            foreach (IWebElement element in elements)
-            {
-                secondnames.Add(new UserData(element.Text));
-            }
-            return secondnames;
-        }
     }
-
-   
 }
 // public UserHelper RemoveUserViaEdit()
 //{
