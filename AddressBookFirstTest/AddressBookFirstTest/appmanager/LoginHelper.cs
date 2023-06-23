@@ -50,7 +50,7 @@ namespace AddressBookTests
         public string GetLogedUserName()
         {
             string text = driver.FindElement(By.Name("logout")).FindElement(By.TagName("b")).Text;
-            return text.Substring(1, text.Length - 2);   
+            return text.Substring(1, text.Length - 2);
         }
     }
 
