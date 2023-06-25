@@ -13,13 +13,12 @@ namespace AddressBookTests
         public void CreationUserTest()
         {
             
-            UserData newuser = new UserData("");
-           newuser.FirstName = "petr";
-            newuser.SecondName = "Petrov";
+            UserData username = new UserData("petr", "Petrov");
+            
 
            // List<UserData> oldUsers = app.User.GetUserList();
 
-            app.User.Create(newuser);
+            app.User.Create(username);
 
            // List<UserData> newUsers = app.User.GetUserList();
             

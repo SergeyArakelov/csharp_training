@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -20,10 +21,10 @@ namespace AddressBookTests
 
 
         }
-        public void Create(UserData newuser)
+        public void Create(UserData username)
         {
             manager.Navigator.GoToUserPage();
-            FillUserName(newuser);
+            FillUserName(username);
             SubmitUserCreation();
             manager.Navigator.GoToHomePage();
 
@@ -34,7 +35,7 @@ namespace AddressBookTests
 
         public void Modify(UserData modify)
         {
-            InitUserModification();
+            InitUserModification(0);
             FillUserForm(modify);
             SubmitUserModification();
         }
@@ -67,10 +68,10 @@ namespace AddressBookTests
             RemovalNotificationAccept();
         }
 
-        public UserHelper FillUserName(UserData newuser)
+        public UserHelper FillUserName(UserData username)
         {
-            Type(By.Name("firstname"), newuser.FirstName);
-            Type(By.Name("lastname"), newuser.SecondName);
+            Type(By.Name("firstname"), username.FirstName);
+            Type(By.Name("lastname"), username.SecondName);
             return this;
         }
         public UserHelper SubmitUserCreation()
@@ -83,9 +84,11 @@ namespace AddressBookTests
             driver.FindElement(By.Name("selected[]")).Click();
             return this;
         }
-        public void InitUserModification()
+        public void InitUserModification(int index)
         {
-            driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
+            driver.FindElements(By.Name("entry"))[index]
+                .FindElements(By.TagName("td"))[7]
+                .FindElement(By.TagName("a")).Click();
 
         }
 
@@ -107,21 +110,74 @@ namespace AddressBookTests
             return this;
         }
 
+        public UserData GetContactInformationFromTable(int index)
+        {
+            manager.Navigator.GoToHomePage();
+            IList<IWebElement> cells = driver.FindElements(By.Name("entry"))[index].FindElements(By.TagName("td"));
+            string secondName = cells[1].Text;
+            string firstName = cells[2].Text;
+            string address = cells[3].Text;
+            string allEmails = cells[4].Text;
+            string allPhones = cells[5].Text;
+
+            return new UserData(firstName, secondName)
+            {
+                Address = address,
+                AllPhones = allPhones,
+                AllEmails = allEmails,
+                
+            };
+
+        }
+
+        public UserData GetContactInformationFromEditForm(int index)
+        {
+            manager.Navigator.GoToHomePage();
+            InitUserModification(0);
+            string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value");
+            string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
+            string address = driver.FindElement(By.Name("address")).GetAttribute("value");
+
+            string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
+            string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
+            string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
+
+            string Email = driver.FindElement(By.Name("email")).GetAttribute("value");
+            string Email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
+            string Email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
+
+
+            return new UserData(firstName, lastName)
+            {
+                Address = address,
+                HomePhone = homePhone,
+                MobilePhone = mobilePhone,
+                WorkPhone = workPhone,
+                Email = Email,
+                Email2 = Email2,
+                Email3 = Email3,    
+            };
+
+        }
+
         //public List<UserData> GetUserList()
         //{
-        //    List<UserData> newusers = new List<UserData>();
-        //    ICollection<IWebElement> FirstName = driver.FindElements(By.CssSelector("tr > td:nth-of-type(3)"));
-        //    ICollection<IWebElement> SecondName = driver.FindElements(By.CssSelector("tr > td:nth-of-type(2)"));
-        //    for (int i = 0; i < newusers.Count; i++)
-        //    {
-        //       // UserData newuser = new UserData(newuser(i));
+        // List<UserData> newusers = new List<UserData>();
+           
+           // ICollection<IWebElement> firstName = driver.FindElements(By.CssSelector("tr > td:nth-of-type(3)"));
+           // ICollection<IWebElement> secondName = driver.FindElements(By.CssSelector("tr > td:nth-of-type(2)"));
+           // for (int i = 0; i < firstName.Count && i < secondName.Count; i++)
+           // {
+              // UserData newuser = new UserData(firstName.ElementAt(i).Text, secondName.ElementAt(i).Text);
 
-        //       // newusers.Add(newuser);
-        //    }
-        //   // IList<IWebElement> cells = newuser.FindElements(By.TagName("td"));
-        //    return newusers;
-        //}
-    }
+              //  newusers.Add(newuser);
+             //}
+           //IList<IWebElement> cells = driver.FindElements(By.TagName("td"));
+            //string secondName = cells[1].Text;
+            //string firstName = cells[2].Text;
+            //return new UserData(firstName, secondName);
+            // }
+        }
 }
 // public UserHelper RemoveUserViaEdit()
 //{
