@@ -52,7 +52,8 @@ namespace AddressBookTests
             {
                 return "";
             }
-           return Regex.Replace(phone,"[ -()]" ,"") + "\r\n";
+            return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
+                // return Regex.Replace(phone, "[ (-)HMW:]", "") + "\r\n";
         }
 
        
@@ -91,7 +92,8 @@ namespace AddressBookTests
 
         public override string ToString()
         {
-            return "firstName=" + FirstName + "secondName " + SecondName;
+            return "firstName=" + FirstName + "\nsecondName " + SecondName + "\naddress " + Address +
+                "\nhome" + HomePhone + "\nwork" + WorkPhone + "\nmobile" + MobilePhone + "\nemail" + Email;
         }
 
         public  int CompareTo(UserData other)

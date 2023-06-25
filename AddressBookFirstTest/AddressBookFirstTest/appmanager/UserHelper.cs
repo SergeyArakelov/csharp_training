@@ -167,14 +167,17 @@ namespace AddressBookTests
 
         }
 
-        //public UserData GetContactInformationFromDetails(int v)
-        //{
-           // manager.Navigator.GoToHomePage();
-           // ViewUserDetails(1);
-           // string ViewForm = driver.FindElement(By.TagName("content")).Text;
-            //return;
+        public UserData GetContactInformationFromDetails(int v)
+        {
+            manager.Navigator.GoToHomePage();
+            ViewUserDetails(0);
+            string ViewForm = driver.FindElement(By.XPath("/html//div[@id='content']")).Text;
+            return new UserData(null, null)
+            {
+                ViewForm = ViewForm
+            };
             
-       // }
+        }
 
         public void ViewUserDetails(int index)
         {
