@@ -72,6 +72,13 @@ namespace AddressBookTests
         {
             Type(By.Name("firstname"), username.FirstName);
             Type(By.Name("lastname"), username.SecondName);
+            Type(By.Name("address"), username.Address);
+            Type(By.Name("home"), username.HomePhone);
+            Type(By.Name("work"), username.WorkPhone);
+            Type(By.Name("mobile"), username.MobilePhone);
+            Type(By.Name("email"), username.Email);
+            Type(By.Name("email2"), username.Email2);
+            Type(By.Name("email3"), username.Email3);
             return this;
         }
         public UserHelper SubmitUserCreation()
@@ -125,7 +132,7 @@ namespace AddressBookTests
                 Address = address,
                 AllPhones = allPhones,
                 AllEmails = allEmails,
-                
+
             };
 
         }
@@ -135,7 +142,7 @@ namespace AddressBookTests
             manager.Navigator.GoToHomePage();
             InitUserModification(0);
             string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value");
-            string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
+            string secondName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
             string address = driver.FindElement(By.Name("address")).GetAttribute("value");
 
             string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
@@ -147,7 +154,7 @@ namespace AddressBookTests
             string Email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
 
 
-            return new UserData(firstName, lastName)
+            return new UserData(firstName, secondName)
             {
                 Address = address,
                 HomePhone = homePhone,
@@ -155,29 +162,47 @@ namespace AddressBookTests
                 WorkPhone = workPhone,
                 Email = Email,
                 Email2 = Email2,
-                Email3 = Email3,    
+                Email3 = Email3,
             };
 
+        }
+
+        //public UserData GetContactInformationFromDetails(int v)
+        //{
+           // manager.Navigator.GoToHomePage();
+           // ViewUserDetails(1);
+           // string ViewForm = driver.FindElement(By.TagName("content")).Text;
+            //return;
+            
+       // }
+
+        public void ViewUserDetails(int index)
+        {
+            manager.Navigator.GoToHomePage();
+            driver.FindElements(By.Name("entry"))[index]
+                .FindElements(By.TagName("td"))[6]
+                .FindElement(By.TagName("a")).Click();
         }
 
         //public List<UserData> GetUserList()
         //{
         // List<UserData> newusers = new List<UserData>();
-           
-           // ICollection<IWebElement> firstName = driver.FindElements(By.CssSelector("tr > td:nth-of-type(3)"));
-           // ICollection<IWebElement> secondName = driver.FindElements(By.CssSelector("tr > td:nth-of-type(2)"));
-           // for (int i = 0; i < firstName.Count && i < secondName.Count; i++)
-           // {
-              // UserData newuser = new UserData(firstName.ElementAt(i).Text, secondName.ElementAt(i).Text);
 
-              //  newusers.Add(newuser);
-             //}
-           //IList<IWebElement> cells = driver.FindElements(By.TagName("td"));
-            //string secondName = cells[1].Text;
-            //string firstName = cells[2].Text;
-            //return new UserData(firstName, secondName);
-            // }
-        }
+        // ICollection<IWebElement> firstName = driver.FindElements(By.CssSelector("tr > td:nth-of-type(3)"));
+        // ICollection<IWebElement> secondName = driver.FindElements(By.CssSelector("tr > td:nth-of-type(2)"));
+        // for (int i = 0; i < firstName.Count && i < secondName.Count; i++)
+        // {
+        // UserData newuser = new UserData(firstName.ElementAt(i).Text, secondName.ElementAt(i).Text);
+
+        //  newusers.Add(newuser);
+        //}
+        //IList<IWebElement> cells = driver.FindElements(By.TagName("td"));
+        //string secondName = cells[1].Text;
+        //string firstName = cells[2].Text;
+        //return new UserData(firstName, secondName);
+        // }
+
+    }
 }
 // public UserHelper RemoveUserViaEdit()
 //{

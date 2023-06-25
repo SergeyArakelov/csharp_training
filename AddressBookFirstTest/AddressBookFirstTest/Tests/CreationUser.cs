@@ -8,19 +8,36 @@ namespace AddressBookTests
     {
 
 
-
-        [Test]
-        public void CreationUserTest()
+        public static IEnumerable<UserData> RandomUserDataProvider()
+        {
+            List<UserData> users = new List<UserData>();
+            for (int i = 0; i < 5; i++)
+            {
+                users.Add(new UserData(GenerateRandomString(30), GenerateRandomString(30))
+                {
+                    Address = GenerateRandomString(100),
+                    HomePhone = GenerateRandomString(30),
+                    WorkPhone = GenerateRandomString(30),
+                    MobilePhone = GenerateRandomString(30),
+                    Email = GenerateRandomString(30)
+                    
+                });
+            }
+            return users;
+        }
+        
+        
+        [Test, TestCaseSource("RandomUserDataProvider")]
+        public void CreationUserTest(UserData username)
         {
             
-            UserData username = new UserData("petr", "Petrov");
             
 
-           // List<UserData> oldUsers = app.User.GetUserList();
+            //List<UserData> oldUsers = app.User.GetUserList();
 
             app.User.Create(username);
 
-           // List<UserData> newUsers = app.User.GetUserList();
+           //List<UserData> newUsers = app.User.GetUserList();
             
             //oldUsers.Sort();
             //newUsers.Sort();

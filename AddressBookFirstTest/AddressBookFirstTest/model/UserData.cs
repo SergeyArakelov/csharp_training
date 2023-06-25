@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -9,11 +10,22 @@ namespace AddressBookTests
 {
   public class UserData : IEquatable<UserData>, IComparable<UserData>
     {
-        private string allPhones;
+        public string HomePhone { get; set; }
+        public string MobilePhone { get; set; }
+        public string WorkPhone { get; set; }
+        public string AllEmails { get; set; }
+        public string Email { get; set; }
+        public string Email2 { get; set; }
+        public string Email3 { get; set; }
 
+        
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string Address { get; set; }
+
+        public string allPhones;
+        public string ViewForm { get; set; }
+
         public string AllPhones { 
             
             get 
@@ -34,30 +46,25 @@ namespace AddressBookTests
             } 
         }
 
-        private string CleanUp(string phone)
+        public string CleanUp(string phone)
         {
             if (phone == null || phone == "")
             {
                 return "";
             }
-           return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
+           return Regex.Replace(phone,"[ -()]" ,"") + "\r\n";
         }
 
-        public string HomePhone { get; set; }
-        public string MobilePhone { get; set; }
-        public string WorkPhone { get; set; }
-        public string AllEmails { get; set; }
-        public string Email { get; set; }
-        public string Email2 { get; set; }
-        public string Email3 { get; set; }
+       
+
 
 
 
         public UserData(string firstName, string secondName)
-            {
+        {
             FirstName = firstName;
             SecondName = secondName;
-            }
+        }
 
 
 
