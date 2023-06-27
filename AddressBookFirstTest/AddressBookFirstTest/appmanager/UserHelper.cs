@@ -163,18 +163,19 @@ namespace AddressBookTests
                 Email = Email,
                 Email2 = Email2,
                 Email3 = Email3,
+                
             };
 
         }
 
-        public UserData GetContactInformationFromDetails(int v)
+        public UserData GetContactInformationFromDetails()
         {
             manager.Navigator.GoToHomePage();
             ViewUserDetails(0);
-            string ViewForm = driver.FindElement(By.XPath("/html//div[@id='content']")).Text;
+            string allInfo = driver.FindElement(By.XPath("/html//div[@id='content']")).Text;
             return new UserData(null, null)
             {
-                ViewForm = ViewForm
+                AllInfo = allInfo
             };
             
         }

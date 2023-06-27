@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -16,15 +17,49 @@ namespace AddressBookTests
         public string AllEmails { get; set; }
         public string Email { get; set; }
         public string Email2 { get; set; }
-        public string Email3 { get; set; }
-
-        
+        public string Email3 { get; set; }     
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string Address { get; set; }
 
+        public string allInfo;
+
+
+        public string AllInfo
+        {
+            get
+            {
+                if (allInfo != null)
+                {
+                    return CleanUpAllForm(allInfo);
+                }
+                else
+                {
+                    return CleanUpAllForm(FirstName + SecondName + Address + HomePhone + MobilePhone + WorkPhone + Email).Trim();
+                    //return CleanUpAllForm(FirstName + SecondName) + CleanUpAllForm(Address)+ CleanUpAllForm(HomePhone) + CleanUpAllForm(MobilePhone) + CleanUpAllForm(WorkPhone) + CleanUpAllForm(Email).Trim();
+                }
+            }
+            set
+
+            {
+                allInfo = value;
+            }
+        }
+
+        public string CleanUpAllForm(string fullInfo)
+        {
+            if (fullInfo == null || fullInfo == "")
+            {
+                return "";
+            }
+    
+            return fullInfo.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "").Replace("H", "").Replace("M", "").Replace("W", "").Replace(":", "").Replace("\r", "").Replace("\n", "");
+
+        }
+
+       
+
         public string allPhones;
-        public string ViewForm { get; set; }
 
         public string AllPhones { 
             
