@@ -31,11 +31,11 @@ namespace AddressBookTests
             {
                 if (allInfo != null)
                 {
-                    return CleanUpAllForm(allInfo);
+                    return allInfo;
                 }
                 else
                 {
-                    return CleanUpAllForm(FirstName + SecondName + Address + HomePhone + MobilePhone + WorkPhone + Email).Trim();
+                    return FirstName + " "+  SecondName + "\r\n" + Address + "\r\n" + "\r\n" + "H: " + HomePhone + "\r\n" + "M: " + MobilePhone + "\r\n" + "W: " + WorkPhone + "\r\n" + "\r\n" + Email.Trim();
                     //return CleanUpAllForm(FirstName + SecondName) + CleanUpAllForm(Address)+ CleanUpAllForm(HomePhone) + CleanUpAllForm(MobilePhone) + CleanUpAllForm(WorkPhone) + CleanUpAllForm(Email).Trim();
                 }
             }
@@ -46,16 +46,26 @@ namespace AddressBookTests
             }
         }
 
-        public string CleanUpAllForm(string fullInfo)
-        {
-            if (fullInfo == null || fullInfo == "")
-            {
-                return "";
-            }
-    
-            return fullInfo.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "").Replace("H", "").Replace("M", "").Replace("W", "").Replace(":", "").Replace("\r", "").Replace("\n", "");
+        //public string CleanUpAllForm(string fullInfo)
+        //{
+        //    if (fullInfo == null || fullInfo == "")
+        //    {
+        //        return "";
+        //    }
 
-        }
+        //    StringBuilder sb = new (fullInfo);
+        //    sb.Replace(" ", "");
+        //    sb.Replace("-", "");
+        //    sb.Replace("(", "");
+        //    sb.Replace(")", "");
+        //    sb.Replace("H", "");
+        //    sb.Replace("M", "");
+        //    sb.Replace("W", "");
+        //    sb.Replace(":", "");
+            
+
+        //    return sb.ToString();
+        //}
 
        
 
@@ -87,7 +97,17 @@ namespace AddressBookTests
             {
                 return "";
             }
-            return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
+            StringBuilder sb = new StringBuilder(phone);
+            sb.Replace(" ", "");
+            sb.Replace("-", "");
+            sb.Replace("(", "");
+            sb.Replace(")", "");
+            sb.Append("\r");
+            sb.Append("\n");
+            
+
+            return sb.ToString();
+                //phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
                 // return Regex.Replace(phone, "[ (-)HMW:]", "") + "\r\n";
         }
 
