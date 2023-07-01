@@ -120,6 +120,7 @@ namespace AddressBookTests
         {
             FirstName = firstName;
             SecondName = secondName;
+            
         }
 
 
@@ -151,7 +152,7 @@ namespace AddressBookTests
                 "\nhome" + HomePhone + "\nwork" + WorkPhone + "\nmobile" + MobilePhone + "\nemail" + Email;
         }
 
-        public  int CompareTo(UserData other)
+        public int CompareTo(UserData other)
         {
             if (Object.ReferenceEquals(other, null))
             {
