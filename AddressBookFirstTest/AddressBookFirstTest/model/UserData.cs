@@ -35,7 +35,7 @@ namespace AddressBookTests
                 }
                 else
                 {
-                    return FirstName + " "+  SecondName + "\r\n" + Address + "\r\n" + "\r\n" + "H: " + HomePhone + "\r\n" + "M: " + MobilePhone + "\r\n" + "W: " + WorkPhone + "\r\n" + "\r\n" + Email.Trim();
+                    return FirstName + " " +  SecondName + "\r\n" + Address + "\r\n" + "\r\n" + "H: " + HomePhone + "\r\n" + "M: " + MobilePhone + "\r\n" + "W: " + WorkPhone + "\r\n" + "\r\n" + Email.Trim();
                     //return CleanUpAllForm(FirstName + SecondName) + CleanUpAllForm(Address)+ CleanUpAllForm(HomePhone) + CleanUpAllForm(MobilePhone) + CleanUpAllForm(WorkPhone) + CleanUpAllForm(Email).Trim();
                 }
             }
