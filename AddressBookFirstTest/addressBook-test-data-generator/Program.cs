@@ -16,6 +16,7 @@ class Program
                     TestBase.GenerateRandomString(10)
                     ));
             }
+            writer.Close();
     }
  }
 }
