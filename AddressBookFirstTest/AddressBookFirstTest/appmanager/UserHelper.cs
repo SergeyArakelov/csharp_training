@@ -188,23 +188,23 @@ namespace AddressBookTests
                 .FindElement(By.TagName("a")).Click();
         }
 
-        //public List<UserData> GetUserList()
-        //{
-        // List<UserData> newusers = new List<UserData>();
+        public List<UserData> GetUserList()
+        {
+         List<UserData> newusers = new List<UserData>();
 
-        // ICollection<IWebElement> firstName = driver.FindElements(By.CssSelector("tr > td:nth-of-type(3)"));
-        // ICollection<IWebElement> secondName = driver.FindElements(By.CssSelector("tr > td:nth-of-type(2)"));
-        // for (int i = 0; i < firstName.Count && i < secondName.Count; i++)
-        // {
-        // UserData newuser = new UserData(firstName.ElementAt(i).Text, secondName.ElementAt(i).Text);
+         ICollection<IWebElement> firstName = driver.FindElements(By.CssSelector("tr > td:nth-of-type(3)"));
+         ICollection<IWebElement> secondName = driver.FindElements(By.CssSelector("tr > td:nth-of-type(2)"));
+         for (int i = 0; i < firstName.Count && i < secondName.Count; i++)
+         {
+         UserData newuser = new UserData(firstName.ElementAt(i).Text, secondName.ElementAt(i).Text);
 
-        //  newusers.Add(newuser);
-        //}
-        //IList<IWebElement> cells = driver.FindElements(By.TagName("td"));
-        //string secondName = cells[1].Text;
-        //string firstName = cells[2].Text;
-        //return new UserData(firstName, secondName);
-        // }
+          newusers.Add(newuser);
+        }
+        IList<IWebElement> cells = driver.FindElements(By.TagName("td"));
+        string SecondName = cells[1].Text;
+        string FirstName = cells[2].Text;
+        return new List<UserData>(newusers);
+         }
 
     }
 }
