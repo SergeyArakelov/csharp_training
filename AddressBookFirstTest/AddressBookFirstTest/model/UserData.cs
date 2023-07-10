@@ -35,7 +35,7 @@ namespace AddressBookTests
                 }
                 else
                 {
-                    return FirstName + " " +  SecondName + "\r\n" + Address + "\r\n" + "\r\n" + CleanUpAllForm("H: " + HomePhone + "\r\n" + "M: " + MobilePhone + "\r\n" + "W: " + WorkPhone) + "\r\n" + "\r\n" + Email.Trim();
+                    return FirstName + " " +  SecondName + "\r\n" + Address + "\r\n" + "\r\n" + "H: " + HomePhone + "\r\n" + "M: " + MobilePhone + "\r\n" + "W: " + WorkPhone + "\r\n" + "\r\n" + Email.Trim();
                     
                 }
             }
@@ -46,42 +46,27 @@ namespace AddressBookTests
             }
         }
 
-        
-        public string CleanUpAllForm(string fillForm)
-        {
-            HomePhone = fillForm;
-            if (fillForm == null || fillForm == "")
-            {
-                
-                StringBuilder sb = new(fillForm);
-                sb.Replace("H:", "");
-                sb.Replace("\r", "");
-                sb.Replace("\n", "");
-                return sb.ToString();  
-            }
-            
-            
 
-            if (fillForm == null) 
-            {
-                StringBuilder sb = new(fillForm);
-                sb.Replace("W:", "");
-                sb.Replace("\r", "");
-                sb.Replace("\n", "");
-                return sb.ToString();
-            }
+        //public  string CleanUpAllForm(string fullInfo)
+        //{
+        //   if (fullInfo == null || fullInfo == "")
+        //   {
+        //       return "";
+        //   }
 
-            
-            if (fillForm == null)
-            {
-                StringBuilder sb = new(fillForm);
-                sb.Replace("M:", "");
-                sb.Replace("\r", "");
-                sb.Replace("\n", "");
-                return sb.ToString();
-            }
-            return "";
-        }
+        //   StringBuilder sb = new (fullInfo);
+        //   sb.Replace(" ", "");
+        //   sb.Replace("-", "");
+        //    sb.Replace("(", "");
+        //   sb.Replace(")", "");
+        //   sb.Replace("H", "");
+        //   sb.Replace("M", "");
+        //    sb.Replace("W", "");
+        //  sb.Replace(":", "");
+
+
+        //    return sb.ToString();
+        //}
 
 
         public string allPhones;
@@ -187,23 +172,3 @@ namespace AddressBookTests
 }
 
 
-//public  string CleanUpAllForm(string fullInfo)
-//{
-//   if (fullInfo == null || fullInfo == "")
-//   {
-//       return "";
-//   }
-
-//   StringBuilder sb = new (fullInfo);
-//   sb.Replace(" ", "");
-//   sb.Replace("-", "");
-//    sb.Replace("(", "");
-//   sb.Replace(")", "");
-//   sb.Replace("H", "");
-//   sb.Replace("M", "");
-//    sb.Replace("W", "");
-//  sb.Replace(":", "");
-
-
-//    return sb.ToString();
-//}
