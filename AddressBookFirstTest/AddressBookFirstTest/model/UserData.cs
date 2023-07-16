@@ -52,7 +52,7 @@ namespace AddressBookTests
             {
                 return "W: " + WorkPhone;
             }
-            return WorkPhone;
+            return "";
         }
         public string CleanUpHomePhone(string HomePhone)
         {
@@ -61,7 +61,7 @@ namespace AddressBookTests
                 {
                     return "H: " + HomePhone;
                 }
-                return HomePhone;
+                return "";
         }
             public string CleanUpMobilePhone(string MobilePhone) 
             {

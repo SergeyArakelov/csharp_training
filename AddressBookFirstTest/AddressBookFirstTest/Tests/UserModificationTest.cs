@@ -19,7 +19,8 @@ namespace AddressBookTests
             List<UserData> oldUsers = app.User.GetUserList();
             app.User.Modify(modify);
             List<UserData> newUsers = app.User.GetUserList();
-    
+            oldUsers[0].FirstName = modify.FirstName;
+            oldUsers[0].SecondName = modify.SecondName;
             oldUsers.Sort();
             newUsers.Sort();
             Assert.AreEqual(oldUsers, newUsers);
