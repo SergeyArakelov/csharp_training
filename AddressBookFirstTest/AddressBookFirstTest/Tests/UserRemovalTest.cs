@@ -19,9 +19,11 @@ namespace AddressBookTests
             {
                 app.User.CreateEmptyUser();
             }
-            // выполняем основной сценарий
+            List<UserData> oldUsers = app.User.GetUserList();
             app.User.RemoveUser();
-            
+            List<UserData> newUsers = app.User.GetUserList();
+            oldUsers.RemoveAt(0);
+            Assert.AreEqual(oldUsers, newUsers);
         }
     }
 }

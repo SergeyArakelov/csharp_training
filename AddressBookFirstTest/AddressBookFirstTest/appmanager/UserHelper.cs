@@ -50,6 +50,8 @@ namespace AddressBookTests
         public UserHelper FillUserForm(UserData modify)
         {
             Type(By.Name("firstname"), modify.FirstName);
+            Type(By.Name("lastname"), modify.SecondName);
+
             return this;
         }
 

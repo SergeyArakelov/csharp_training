@@ -33,15 +33,15 @@ namespace AddressBookTests
             
             
 
-            //List<UserData> oldUsers = app.User.GetUserList();
+            List<UserData> oldUsers = app.User.GetUserList();
 
             app.User.Create(username);
 
-           //List<UserData> newUsers = app.User.GetUserList();
-            
-            //oldUsers.Sort();
-            //newUsers.Sort();
-            //Assert.AreEqual(oldUsers, newUsers);
+           List<UserData> newUsers = app.User.GetUserList();
+            oldUsers.Add(username);
+            oldUsers.Sort();
+            newUsers.Sort();
+            Assert.AreEqual(oldUsers, newUsers);
         }
 
        

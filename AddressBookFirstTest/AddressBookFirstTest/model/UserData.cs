@@ -35,7 +35,7 @@ namespace AddressBookTests
                 }
                 else
                 {
-                    return FirstName + " " +  SecondName + "\r\n" + Address + "\r\n" + "\r\n" + ("H: " + HomePhone) + "\r\n" + "M: " + MobilePhone + "\r\n" + "W: " + WorkPhone + "\r\n" + "\r\n" + Email.Trim();
+                    return FirstName + " " +  SecondName + "\r\n" + Address + "\r\n" + "\r\n" + CleanUpHomePhone(HomePhone + "\r\n") + CleanUpMobilePhone(MobilePhone + "\r\n") + CleanUpWorkPhone(WorkPhone + "\r\n") + "\r\n" + Email.Trim();
                     
                 }
             }
@@ -46,27 +46,35 @@ namespace AddressBookTests
             }
         }
 
+        public string CleanUpWorkPhone (string WorkPhone)
+        {
+            if (WorkPhone != null)
+            {
+                return "W: " + WorkPhone;
+            }
+            return WorkPhone;
+        }
+        public string CleanUpHomePhone(string HomePhone)
+        {
+            
+                if (HomePhone != null)
+                {
+                    return "H: " + HomePhone;
+                }
+                return HomePhone;
+        }
+            public string CleanUpMobilePhone(string MobilePhone) 
+            {
+                if (MobilePhone != null)
+                {
+                    
+                return "M: " + MobilePhone;
 
-        //public  string CleanUpAllForm(string fullInfo)
-        //{
-        //   if (fullInfo == null || fullInfo == "")
-        //   {
-        //       return "";
-        //   }
+            }
+            return "";
 
-        //   StringBuilder sb = new (fullInfo);
-        //   sb.Replace(" ", "");
-        //   sb.Replace("-", "");
-        //    sb.Replace("(", "");
-        //   sb.Replace(")", "");
-        //   sb.Replace("H", "");
-        //   sb.Replace("M", "");
-        //    sb.Replace("W", "");
-        //  sb.Replace(":", "");
-
-
-        //    return sb.ToString();
-        //}
+        }
+         
 
 
         public string allPhones;
