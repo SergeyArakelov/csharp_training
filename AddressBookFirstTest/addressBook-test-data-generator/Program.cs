@@ -1,6 +1,7 @@
 ﻿using AddressBookTests;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace addressBook
 {
@@ -30,6 +31,10 @@ class Program
             {
                 writeGroupsToXmlFile(groups, writer);
             }
+            else if (format == "json")
+            {
+                writeGroupsToJsonFile(groups, writer);
+            }
             else
             {
                 System.Console.Out.Write("Unrecognized format" + format);
@@ -51,7 +56,10 @@ class Program
             new XmlSerializer(typeof(List<GroupData>)).Serialize(writer, groups);
         }
 
-
+        static void writeGroupsToJsonFile(List<GroupData> groups, StreamWriter writer)
+        {
+            writer.Write(JsonConvert.SerializeObject(groups));
+        }
     }
 }
 

@@ -1,5 +1,7 @@
-﻿using NUnit.Framework;
+﻿using Newtonsoft.Json;
+using NUnit.Framework;
 using System.Security.Cryptography;
+using System.Xml.Serialization;
 
 namespace AddressBookTests
 {
@@ -25,9 +27,22 @@ namespace AddressBookTests
             }
             return users;
         }
+        public static IEnumerable<UserData> UserDataFromXmlFile()
+        {
+
+            return (List<UserData>)new XmlSerializer(typeof(List<GroupData>))
+                .Deserialize(new StreamReader(@"users.xml"));
+
+        }
+        public static IEnumerable<UserData> UserDataFromJsonFile()
+        {
+            return JsonConvert.DeserializeObject<List<UserData>>(
+                 File.ReadAllText(@"users.json"));
+        }
+
         
-        
-        [Test, TestCaseSource("RandomUserDataProvider")]
+
+        [Test, TestCaseSource("UserDataFromXmlFile")]
         public void CreationUserTest(UserData username)
         {
             

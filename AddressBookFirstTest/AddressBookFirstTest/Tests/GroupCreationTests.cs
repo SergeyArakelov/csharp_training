@@ -1,4 +1,7 @@
 using NUnit.Framework;
+using System.Xml;
+using NUnit.Framework.Constraints;
+using System.Xml.Serialization;
 
 namespace AddressBookTests
 {
@@ -19,11 +22,11 @@ namespace AddressBookTests
             return groups;
         }
 
-       public static IEnumerable<GroupData> GroupDataFromFile()
+       public static IEnumerable<GroupData> GroupDataFromCsvFile()
         {
             List<GroupData> groups = new List<GroupData>();
             string[] lines = File.ReadAllLines(@"groups.csv");
-            foreach (string l in lines)
+            foreach (string l in lines) 
             {
                 string[] parts = l.Split(',');
                 groups.Add(new GroupData(parts[0])
@@ -34,9 +37,15 @@ namespace AddressBookTests
             }
             return groups;
         }
+        public static IEnumerable<GroupData> GroupDataFromXmlFile()
+        {
+            
+           return (List<GroupData>) new XmlSerializer(typeof(List<GroupData>)).Deserialize(new StreamReader(@"groups.xml"));
+          
+        }
 
 
-        [Test, TestCaseSource("GroupDataFromFile")]
+        [Test, TestCaseSource("GroupDataFromXmlFile")]
         public void GroupCreationTest(GroupData group)
         {
 
