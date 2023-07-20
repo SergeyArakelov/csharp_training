@@ -48,7 +48,7 @@ namespace AddressBookTests
 
         public string CleanUpWorkPhone (string WorkPhone)
         {
-            if (WorkPhone != null)
+            if (WorkPhone != "" || WorkPhone != null)
             {
                 return "W: " + WorkPhone;
             }
@@ -57,7 +57,7 @@ namespace AddressBookTests
         public string CleanUpHomePhone(string HomePhone)
         {
             
-                if (HomePhone != null)
+                if (HomePhone != "")
                 {
                     return "H: " + HomePhone;
                 }
@@ -65,7 +65,7 @@ namespace AddressBookTests
         }
             public string CleanUpMobilePhone(string MobilePhone) 
             {
-                if (MobilePhone != null)
+                if (MobilePhone != " " || WorkPhone != null)
                 {
                     
                 return "M: " + MobilePhone;

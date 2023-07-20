@@ -18,6 +18,7 @@ namespace AddressBookTests
             //modify.EMail = ("Petrov@mic.com");
             List<UserData> oldUsers = app.User.GetUserList();
             app.User.Modify(modify);
+
             List<UserData> newUsers = app.User.GetUserList();
             oldUsers[0].FirstName = modify.FirstName;
             oldUsers[0].SecondName = modify.SecondName;

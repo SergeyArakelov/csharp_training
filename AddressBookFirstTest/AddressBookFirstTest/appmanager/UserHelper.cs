@@ -38,6 +38,7 @@ namespace AddressBookTests
             InitUserModification(0);
             FillUserForm(modify);
             SubmitUserModification();
+            manager.Navigator.GoToHomePage();
         }
 
         public void CreateEmptyUser()
@@ -68,6 +69,7 @@ namespace AddressBookTests
             SelectUser();
             Remove();
             RemovalNotificationAccept();
+            manager.Navigator.GoToHomePage();
         }
 
         public UserHelper FillUserName(UserData username)

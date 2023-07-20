@@ -27,13 +27,13 @@ namespace AddressBookTests
             }
             return users;
         }
-        public static IEnumerable<UserData> UserDataFromXmlFile()
-        {
+       // public static IEnumerable<UserData> UserDataFromXmlFile()
+        //{
 
-            return (List<UserData>)new XmlSerializer(typeof(List<GroupData>))
-                .Deserialize(new StreamReader(@"users.xml"));
+            //return (List<UserData>)new XmlSerializer(typeof(List<GroupData>))
+                //.Deserialize(new StreamReader(@"users.xml"));
 
-        }
+       // }
         public static IEnumerable<UserData> UserDataFromJsonFile()
         {
             return JsonConvert.DeserializeObject<List<UserData>>(

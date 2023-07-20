@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System.Xml;
 using NUnit.Framework.Constraints;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace AddressBookTests
 {
@@ -37,13 +38,17 @@ namespace AddressBookTests
             }
             return groups;
         }
-        public static IEnumerable<GroupData> GroupDataFromXmlFile()
-        {
+        //public static IEnumerable<GroupData> GroupDataFromXmlFile()
+        //{
             
-           return (List<GroupData>) new XmlSerializer(typeof(List<GroupData>)).Deserialize(new StreamReader(@"groups.xml"));
+           //return (List<GroupData>) new XmlSerializer(typeof(List<GroupData>)).Deserialize(new StreamReader(@"groups.xml"));
           
+        //}
+        public static IEnumerable<GroupData> GroupDataFromJsonFile()
+        {
+           return JsonConvert.DeserializeObject<List<GroupData>>(
+                File.ReadAllText(@"groups.json"));
         }
-
 
         [Test, TestCaseSource("GroupDataFromXmlFile")]
         public void GroupCreationTest(GroupData group)
@@ -62,6 +67,20 @@ namespace AddressBookTests
 
         }
 
+        [Test]
+        public void TestDB() 
+        {
+            DateTime start = DateTime.Now;
+            List<GroupData> fromUi = app.Groups.GetGroupList();
+            DateTime end = DateTime.Now;
+            System.Console.Out.WriteLine(end.Subtract(start));
 
+            start = DateTime.Now;
+            AddressBookDB db = new AddressBookDB();
+            List<GroupData> fromDb = (from g in db.Groups select g).ToList();
+            db.Close();
+            end = DateTime.Now;
+            System.Console.Out.WriteLine(end.Subtract(start));
+        }
     }
 }

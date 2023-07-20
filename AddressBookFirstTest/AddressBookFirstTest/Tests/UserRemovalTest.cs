@@ -26,6 +26,8 @@ namespace AddressBookTests
             List<UserData> newUsers = app.User.GetUserList();
 
             oldUsers.RemoveAt(0);
+            oldUsers.Sort();
+            newUsers.Sort();
 
             Assert.AreEqual(oldUsers, newUsers);
         }

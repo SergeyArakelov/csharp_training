@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LinqToDB.Mapping;
 
 namespace AddressBookTests
 {
+    [Table(Name = "group_list")]
    public class GroupData : IEquatable<GroupData>, IComparable<GroupData>   
     {
         public GroupData()
@@ -49,12 +51,12 @@ namespace AddressBookTests
             }
             return Name.CompareTo(other.Name);
         }
-       
-
-        public string Name { get; set; }
-
-        public string Header { get; set; }
+        [Column(Name = "group_name")]       
         
+        public string Name { get; set; }
+        [Column(Name = "group_header")]
+        public string Header { get; set; }
+        [Column(Name = "group_footer")]
         public string Footer { get; set; }
         
     }
