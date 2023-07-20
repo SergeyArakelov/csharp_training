@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -35,7 +36,7 @@ namespace AddressBookTests
                 }
                 else
                 {
-                    return FirstName + " " +  SecondName + "\r\n" + Address + "\r\n" + "\r\n" + CleanUpHomePhone(HomePhone + "\r\n") + CleanUpMobilePhone(MobilePhone + "\r\n") + CleanUpWorkPhone(WorkPhone + "\r\n") + "\r\n" + Email.Trim();
+                    return FirstName + " " +  SecondName  + Address  + CleanUpHomePhone(HomePhone)  + CleanUpMobilePhone(MobilePhone)  + CleanUpWorkPhone(WorkPhone) + CleanUpEmail(Email);
                     
                 }
             }
@@ -48,32 +49,41 @@ namespace AddressBookTests
 
         public string CleanUpWorkPhone (string WorkPhone)
         {
-            if (WorkPhone != "" || WorkPhone != null)
+            if (WorkPhone != "")
             {
-                return "W: " + WorkPhone;
+                return "\r\n" + "\r\n" + "W: " + WorkPhone ;
             }
             return "";
         }
-        public string CleanUpHomePhone(string HomePhone)
-        {
+            public string CleanUpHomePhone(string HomePhone)
+            {
             
                 if (HomePhone != "")
                 {
-                    return "H: " + HomePhone;
+                    return "\r\n" + "\r\n" + "H: " + HomePhone ;
                 }
                 return "";
-        }
-            public string CleanUpMobilePhone(string MobilePhone) 
+            }
+        public string CleanUpMobilePhone(string MobilePhone)
+        {
+            if (MobilePhone != "")
             {
-                if (MobilePhone != "")
-                {
-                    
-                return "M: " + MobilePhone;
+
+                return "\r\n" + "\r\n" + "M: " + MobilePhone;
 
             }
             return "";
-
         }
+            public string CleanUpEmail(string Email)
+            {
+                if (Email != "")
+                {
+                    return "\r\n" + "\r\n" +  Email;
+                }
+                return "";
+            } 
+
+        
          
 
 

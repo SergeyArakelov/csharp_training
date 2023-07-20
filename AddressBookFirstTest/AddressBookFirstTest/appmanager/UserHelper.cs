@@ -205,8 +205,7 @@ namespace AddressBookTests
           newusers.Add(newuser);
         }
         IList<IWebElement> cells = driver.FindElements(By.TagName("td"));
-        //string SecondName = cells[1].Text;
-        //string FirstName = cells[2].Text;
+       
         return new List<UserData>(newusers);
          }
 
