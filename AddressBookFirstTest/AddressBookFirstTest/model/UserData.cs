@@ -65,7 +65,7 @@ namespace AddressBookTests
         }
             public string CleanUpMobilePhone(string MobilePhone) 
             {
-                if (MobilePhone != " " || WorkPhone != null)
+                if (MobilePhone != "")
                 {
                     
                 return "M: " + MobilePhone;
