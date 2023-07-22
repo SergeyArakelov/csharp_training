@@ -41,14 +41,14 @@ namespace AddressBookTests
         //public static IEnumerable<GroupData> GroupDataFromXmlFile()
         //{
             
-           //return (List<GroupData>) new XmlSerializer(typeof(List<GroupData>)).Deserialize(new StreamReader(@"groups.xml"));
+        //   return (List<GroupData>) new XmlSerializer(typeof(List<GroupData>)).Deserialize(new StreamReader(@"groups.xml"));
           
         //}
-        public static IEnumerable<GroupData> GroupDataFromJsonFile()
-        {
-           return JsonConvert.DeserializeObject<List<GroupData>>(
-                File.ReadAllText(@"groups.json"));
-        }
+        //public static IEnumerable<GroupData> GroupDataFromJsonFile()
+        //{
+        //   return JsonConvert.DeserializeObject<List<GroupData>>(
+        //        File.ReadAllText(@"groups.json"));
+        //}
 
         [Test, TestCaseSource("GroupDataFromXmlFile")]
         public void GroupCreationTest(GroupData group)

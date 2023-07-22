@@ -88,6 +88,7 @@ namespace AddressBookTests
         public UserHelper SubmitUserCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
+            userCash = null;
             return this;
         }
         public UserHelper SelectUser()
@@ -106,12 +107,14 @@ namespace AddressBookTests
         public UserHelper SubmitUserModification()
         {
             driver.FindElement(By.Name("update")).Click();
+            userCash = null;
             return this;
         }
 
         public UserHelper Remove()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            userCash = null;
             return this;
         }
 
@@ -191,22 +194,29 @@ namespace AddressBookTests
                 .FindElements(By.TagName("td"))[6]
                 .FindElement(By.TagName("a")).Click();
         }
+        private List<UserData> userCash = null;
+
 
         public List<UserData> GetUserList()
         {
-         List<UserData> newusers = new List<UserData>();
+            if (userCash == null)
+            {
+                userCash = new List<UserData>();
+                List<UserData> newusers = new List<UserData>();
 
-         ICollection<IWebElement> firstName = driver.FindElements(By.CssSelector("tr > td:nth-of-type(3)"));
-         ICollection<IWebElement> secondName = driver.FindElements(By.CssSelector("tr > td:nth-of-type(2)"));
-         for (int i = 0; i < firstName.Count && i < secondName.Count; i++)
-         {
-         UserData newuser = new UserData(firstName.ElementAt(i).Text, secondName.ElementAt(i).Text);
+                ICollection<IWebElement> firstName = driver.FindElements(By.CssSelector("tr > td:nth-of-type(3)"));
+                ICollection<IWebElement> secondName = driver.FindElements(By.CssSelector("tr > td:nth-of-type(2)"));
+                for (int i = 0; i < firstName.Count && i < secondName.Count; i++)
+                {
+                    UserData newuser = new UserData(firstName.ElementAt(i).Text, secondName.ElementAt(i).Text);
 
-          newusers.Add(newuser);
-        }
-        IList<IWebElement> cells = driver.FindElements(By.TagName("td"));
+                    userCash.Add(newuser);
+                }
+                IList<IWebElement> cells = driver.FindElements(By.TagName("td"));
+            }
+        
        
-        return new List<UserData>(newusers);
+        return new List<UserData>(userCash);
          }
 
     }
