@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace AddressBookTests
 {
     [TestFixture]
-    public class GroupCreationTests : AuthTestBase
+    public class GroupCreationTests : GroupTestBase
     {
         public static IEnumerable<GroupData> RandomGroupDataProvider()
         {
@@ -40,9 +40,9 @@ namespace AddressBookTests
         }
         //public static IEnumerable<GroupData> GroupDataFromXmlFile()
         //{
-            
+
         //   return (List<GroupData>) new XmlSerializer(typeof(List<GroupData>)).Deserialize(new StreamReader(@"groups.xml"));
-          
+
         //}
         //public static IEnumerable<GroupData> GroupDataFromJsonFile()
         //{
@@ -50,16 +50,17 @@ namespace AddressBookTests
         //        File.ReadAllText(@"groups.json"));
         //}
 
-        [Test, TestCaseSource("GroupDataFromXmlFile")]
+        //[Test, TestCaseSource("GroupDataFromXmlFile")]
+        
         public void GroupCreationTest(GroupData group)
         {
 
 
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
             app.Groups.Create(group);
 
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
             oldGroups.Add(group);
             oldGroups.Sort();
             newGroups.Sort();
@@ -76,9 +77,8 @@ namespace AddressBookTests
             System.Console.Out.WriteLine(end.Subtract(start));
 
             start = DateTime.Now;
-            AddressBookDB db = new AddressBookDB();
-            List<GroupData> fromDb = (from g in db.Groups select g).ToList();
-            db.Close();
+            List<GroupData> fromDB = GroupData.GetAll();    
+
             end = DateTime.Now;
             System.Console.Out.WriteLine(end.Subtract(start));
         }

@@ -5,6 +5,7 @@ namespace AddressBookTests
 {
     public class TestBase
     {
+        public static bool Perform_Long_Check = true;
 
         protected ApplicationManager app;
 

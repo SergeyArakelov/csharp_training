@@ -27,13 +27,21 @@ namespace AddressBookTests
         }
 
         public bool IsGroupExist => IsElementPresent(By.Name("selected[]"));
-        public void Remove()
-        {
+        //public void Remove()
+        //{
             
-            SelectGroup();
+        //    SelectGroup();
+        //    RemoveGroup();
+        //    ReturnToGroupPage();
+            
+        //}
+        public void Remove(GroupData group)
+        {
+            manager.Navigator.GoToGroupPage();
+
+            SelectGroup(group.Id);
             RemoveGroup();
             ReturnToGroupPage();
-            
         }
 
         public void EmptyGroupCreation()
@@ -89,10 +97,17 @@ namespace AddressBookTests
             groupCash = null;
             return this;
         }
+       
         public GroupHelper SelectGroup()
         {
             driver.FindElement(By.Name("selected[]")).Click();
             return this;
+        }
+        public GroupHelper SelectGroup(String id)
+        {
+            driver.FindElement(By.XPath("(//input [@name= 'selected[]' and @value='" + id + "'])")).Click();
+            return this;
+
         }
         public GroupHelper ReturnToGroupPage()
         {
@@ -124,12 +139,18 @@ namespace AddressBookTests
                 ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
                 foreach (IWebElement element in elements)
                 {
-                    groupCash.Add(new GroupData(element.Text));
 
+                    groupCash.Add(new GroupData(element.Text)
+                    {
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    });
                 }
+                
             }
            
             return new List<GroupData>(groupCash);
         }
+
+       
     }
 }

@@ -7,20 +7,33 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using LinqToDB.Mapping;
 
 namespace AddressBookTests
 {
-  public class UserData : IEquatable<UserData>, IComparable<UserData>
+    [Table(Name = "addressbook")]
+    public class UserData : IEquatable<UserData>, IComparable<UserData>
     {
+        
+        [Column(Name = "home")]
         public string HomePhone { get; set; }
+        [Column(Name = "mobile")]
         public string MobilePhone { get; set; }
+        [Column(Name = "work")]
         public string WorkPhone { get; set; }
+        
         public string AllEmails { get; set; }
+        [Column(Name = "email")]
         public string Email { get; set; }
+        [Column(Name = "email2")]
         public string Email2 { get; set; }
-        public string Email3 { get; set; }     
+        [Column(Name = "email3")]
+        public string Email3 { get; set; }
+        [Column(Name = "firstname")]
         public string FirstName { get; set; }
+        [Column(Name = "lastname")]
         public string SecondName { get; set; }
+        [Column(Name = "address")]
         public string Address { get; set; }
 
         public string allInfo;
@@ -131,7 +144,10 @@ namespace AddressBookTests
 
        
 
+        public UserData()
+        {
 
+        }
 
 
         public UserData(string firstName, string secondName)
@@ -185,6 +201,14 @@ namespace AddressBookTests
             {
                 return SecondName.CompareTo(other.SecondName);
             }
+        }
+        public static List<UserData> GetAllUsers()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from g in db.Users select g).ToList();
+            }
+
         }
     }
 }

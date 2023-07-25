@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace AddressBookTests
 {
     [TestFixture]
-    public class CreationUserTests : AuthTestBase
+    public class CreationUserTests : UserTestBase
     {
 
 
@@ -27,18 +27,18 @@ namespace AddressBookTests
             }
             return users;
         }
-       // public static IEnumerable<UserData> UserDataFromXmlFile()
-       // {
+       public static IEnumerable<UserData> UserDataFromXmlFile()
+       {
 
-       //     return (List<UserData>)new XmlSerializer(typeof(List<GroupData>))
-       //         .Deserialize(new StreamReader(@"users.xml"));
+           return (List<UserData>)new XmlSerializer(typeof(List<GroupData>))
+               .Deserialize(new StreamReader(@"users.xml"));
 
-       //}
-       // public static IEnumerable<UserData> UserDataFromJsonFile()
-       // {
-       //     return JsonConvert.DeserializeObject<List<UserData>>(
-       //          File.ReadAllText(@"users.json"));
-       // }
+       }
+        public static IEnumerable<UserData> UserDataFromJsonFile()
+        {
+            return JsonConvert.DeserializeObject<List<UserData>>(
+                 File.ReadAllText(@"users.json"));
+       }
 
         
 
@@ -48,11 +48,11 @@ namespace AddressBookTests
             
             
 
-            List<UserData> oldUsers = app.User.GetUserList();
+            List<UserData> oldUsers = UserData.GetAllUsers();
 
             app.User.Create(username);
 
-           List<UserData> newUsers = app.User.GetUserList();
+           List<UserData> newUsers = UserData.GetAllUsers();
             oldUsers.Add(username);
             oldUsers.Sort();
             newUsers.Sort();

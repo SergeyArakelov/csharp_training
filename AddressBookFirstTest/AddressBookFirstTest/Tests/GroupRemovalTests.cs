@@ -1,10 +1,11 @@
 ﻿using NUnit.Framework;
 
 
+
 namespace AddressBookTests
 {
     [TestFixture]
-    public class GroupRemovalTests : AuthTestBase
+    public class GroupRemovalTests : GroupTestBase
     {
 
 
@@ -17,13 +18,21 @@ namespace AddressBookTests
                 app.Groups.EmptyGroupCreation();
             }
 
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
-            app.Groups.Remove();
+            List<GroupData> oldGroups = GroupData.GetAll();
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            GroupData toBeRemoved = oldGroups[0];
+            app.Groups.Remove(toBeRemoved);
+
+            List<GroupData> newGroups = GroupData.GetAll();
             oldGroups.RemoveAt(0);
 
             Assert.AreEqual(oldGroups, newGroups);
+
+            foreach (GroupData group in newGroups)
+            {
+                Assert.AreNotEqual(group.Id, toBeRemoved.Id);
+            }
+          
 
         }
     }

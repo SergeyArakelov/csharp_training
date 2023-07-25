@@ -3,7 +3,7 @@
 namespace AddressBookTests
 {
     [TestFixture]
-    public class UserModificationTests : AuthTestBase
+    public class UserModificationTests : UserTestBase
     {
 
         [Test]
@@ -16,10 +16,10 @@ namespace AddressBookTests
             UserData modify = new UserData("Vasiliy","Vasiliev");
 
             //modify.EMail = ("Petrov@mic.com");
-            List<UserData> oldUsers = app.User.GetUserList();
+            List<UserData> oldUsers = UserData.GetAllUsers();
             app.User.Modify(modify);
 
-            List<UserData> newUsers = app.User.GetUserList();
+            List<UserData> newUsers = UserData.GetAllUsers();
             oldUsers[0].FirstName = modify.FirstName;
             oldUsers[0].SecondName = modify.SecondName;
             oldUsers.Sort();

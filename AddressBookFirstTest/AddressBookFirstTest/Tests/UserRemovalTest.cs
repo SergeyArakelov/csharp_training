@@ -19,11 +19,11 @@ namespace AddressBookTests
             {
                 app.User.CreateEmptyUser();
             }
-            List<UserData> oldUsers = app.User.GetUserList();
+            List<UserData> oldUsers = UserData.GetAllUsers();
 
             app.User.RemoveUser();
 
-            List<UserData> newUsers = app.User.GetUserList();
+            List<UserData> newUsers = UserData.GetAllUsers();
 
             oldUsers.RemoveAt(0);
             oldUsers.Sort();
