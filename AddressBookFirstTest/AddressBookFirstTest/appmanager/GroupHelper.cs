@@ -39,7 +39,7 @@ namespace AddressBookTests
         {
             manager.Navigator.GoToGroupPage();
 
-            SelectGroup(group.Id);
+            SelectGroupById(group.Id);
             RemoveGroup();
             ReturnToGroupPage();
         }
@@ -56,12 +56,12 @@ namespace AddressBookTests
        
         
 
-        public GroupHelper Modify(GroupData newData)
+        public GroupHelper Modify(GroupData group)
         {
-            
-            SelectGroup();
+
+            SelectGroupById(group.Id);
             InitGroupModification();
-            FillGroupForm(newData);
+            FillGroupForm(group);
             SubmitGroupModification();
             ReturnToGroupPage();
 
@@ -103,7 +103,7 @@ namespace AddressBookTests
             driver.FindElement(By.Name("selected[]")).Click();
             return this;
         }
-        public GroupHelper SelectGroup(String id)
+        public GroupHelper SelectGroupById(String id)
         {
             driver.FindElement(By.XPath("(//input [@name= 'selected[]' and @value='" + id + "'])")).Click();
             return this;

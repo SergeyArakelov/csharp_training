@@ -14,5 +14,6 @@ namespace AddressBookTests
         public ITable<GroupData> Groups { get { return this.GetTable<GroupData>(); } }
 
         public ITable<UserData> Users { get { return this.GetTable<UserData>(); } }
+        public ITable<GroupContactRelation> GCR { get { return this.GetTable<GroupContactRelation>(); } }
     }
 }

@@ -71,6 +71,14 @@ namespace AddressBookTests
             }
 
         }
-
+        public List<UserData> GetUsers()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from c in db.Users 
+                        from gcr in db.GCR.Where(p => p.GroupId == Id && p.UserId == c.Id)
+                        select c).ToList();
+            }
+        }
     }
 }

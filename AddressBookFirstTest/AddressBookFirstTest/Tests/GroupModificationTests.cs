@@ -16,15 +16,17 @@ namespace AddressBookTests
                 app.Groups.EmptyGroupCreation();
             }
 
-            GroupData newData = new GroupData("zzz");
-            newData.Header = null;
-            newData.Footer = null;
-
+            
+            
             List<GroupData> oldGroups = GroupData.GetAll();
+            GroupData toBeModify = oldGroups[5];
+            toBeModify.Name = "Name";
+            toBeModify.Header = null;
+            toBeModify.Footer = null;
 
-            app.Groups.Modify(newData);
+            app.Groups.Modify(toBeModify);
             List<GroupData> newGroups = GroupData.GetAll();
-            oldGroups[0].Name = newData.Name;
+            oldGroups[0].Name = toBeModify.Name;
             oldGroups.Sort();
             newGroups.Sort();
 
@@ -32,10 +34,10 @@ namespace AddressBookTests
 
             //foreach (GroupData group in newGroups) 
             //{
-            //    if(group.Id = oldGroups[0].Id)
+            //    if(group.Id = oldGroups)
             //    {
-            //        Assert.AreEqual(group.Name, newData.Name);
-            //    }
+            //        Assert.AreEqual(group.Name, toBeModify.Name);
+            //  }
 
             //}
 

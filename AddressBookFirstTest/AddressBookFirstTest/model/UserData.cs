@@ -14,7 +14,9 @@ namespace AddressBookTests
     [Table(Name = "addressbook")]
     public class UserData : IEquatable<UserData>, IComparable<UserData>
     {
-        
+
+        [Column(Name = "id"), PrimaryKey]
+        public string Id { get; set; }
         [Column(Name = "home")]
         public string HomePhone { get; set; }
         [Column(Name = "mobile")]
@@ -206,7 +208,7 @@ namespace AddressBookTests
         {
             using (AddressBookDB db = new AddressBookDB())
             {
-                return (from g in db.Users select g).ToList();
+                return (from u in db.Users select u).ToList();
             }
 
         }

@@ -35,7 +35,7 @@ namespace AddressBookTests
 
         public void Modify(UserData modify)
         {
-            InitUserModification(0);
+            InitUserModification(1);
             FillUserForm(modify);
             SubmitUserModification();
             manager.Navigator.GoToHomePage();

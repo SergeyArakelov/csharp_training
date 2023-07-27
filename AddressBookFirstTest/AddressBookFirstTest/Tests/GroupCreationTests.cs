@@ -82,5 +82,12 @@ namespace AddressBookTests
             end = DateTime.Now;
             System.Console.Out.WriteLine(end.Subtract(start));
         }
+        [Test]
+        public void TestDBConnectivity() {
+          foreach(UserData user in GroupData.GetAll()[0].GetUsers())
+            {
+                Console.Out.WriteLine(user);
+            }
+        }
     }
 }
