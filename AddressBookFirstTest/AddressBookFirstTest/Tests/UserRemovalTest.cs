@@ -20,8 +20,9 @@ namespace AddressBookTests
                 app.User.CreateEmptyUser();
             }
             List<UserData> oldUsers = UserData.GetAllUsers();
+            UserData ToBeRemoved = oldUsers[0];
 
-            app.User.RemoveUser();
+            app.User.RemoveUser(ToBeRemoved);
 
             List<UserData> newUsers = UserData.GetAllUsers();
 

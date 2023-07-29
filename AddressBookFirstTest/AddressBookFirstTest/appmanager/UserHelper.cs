@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,11 @@ namespace AddressBookTests
 
 
         }
-        public void Create(UserData username)
+        public void Create(UserData user)
         {
             manager.Navigator.GoToUserPage();
-            FillUserName(username);
+            InitUserModification(1);
+            FillUserName(user);
             SubmitUserCreation();
             manager.Navigator.GoToHomePage();
 
@@ -33,10 +35,11 @@ namespace AddressBookTests
         public bool IsUserExist => IsElementPresent(By.XPath("//img[@alt='Details']"));
 
 
-        public void Modify(UserData modify)
+        public void Modify(UserData user)
         {
-            InitUserModification(1);
-            FillUserForm(modify);
+            SelectUser(user.Id);
+            InitUserModification(0);
+            FillUserForm(user);
             SubmitUserModification();
             manager.Navigator.GoToHomePage();
         }
@@ -48,10 +51,10 @@ namespace AddressBookTests
             manager.Navigator.GoToHomePage();
         }
 
-        public UserHelper FillUserForm(UserData modify)
+        public UserHelper FillUserForm(UserData user)
         {
-            Type(By.Name("firstname"), modify.FirstName);
-            Type(By.Name("lastname"), modify.SecondName);
+            Type(By.Name("firstname"), user.FirstName);
+            Type(By.Name("lastname"), user.SecondName);
 
             return this;
         }
@@ -64,25 +67,25 @@ namespace AddressBookTests
         //}
 
 
-        public void RemoveUser()
+        public void RemoveUser(UserData user)
         {
-            SelectUser();
+            SelectUser(user.Id);
             Remove();
             RemovalNotificationAccept();
             manager.Navigator.GoToHomePage();
         }
 
-        public UserHelper FillUserName(UserData username)
+        public UserHelper FillUserName(UserData user)
         {
-            Type(By.Name("firstname"), username.FirstName);
-            Type(By.Name("lastname"), username.SecondName);
-            Type(By.Name("address"), username.Address);
-            Type(By.Name("home"), username.HomePhone);
-            Type(By.Name("work"), username.WorkPhone);
-            Type(By.Name("mobile"), username.MobilePhone);
-            Type(By.Name("email"), username.Email);
-            Type(By.Name("email2"), username.Email2);
-            Type(By.Name("email3"), username.Email3);
+            Type(By.Name("firstname"), user.FirstName);
+            Type(By.Name("lastname"), user.SecondName);
+            Type(By.Name("address"), user.Address);
+            Type(By.Name("home"), user.HomePhone);
+            Type(By.Name("work"), user.WorkPhone);
+            Type(By.Name("mobile"), user.MobilePhone);
+            Type(By.Name("email"), user.Email);
+            Type(By.Name("email2"), user.Email2);
+            Type(By.Name("email3"), user.Email3);
             return this;
         }
         public UserHelper SubmitUserCreation()
@@ -91,11 +94,11 @@ namespace AddressBookTests
             userCash = null;
             return this;
         }
-        public UserHelper SelectUser()
-        {
-            driver.FindElement(By.Name("selected[]")).Click();
-            return this;
-        }
+        //public UserHelper SelectUser(String id)
+        //{
+        //    driver.FindElement(By.XPath("(//input [@name= 'selected[]' and @value='" + id + "'])")).Click();
+        //    return this;
+        //}
         public void InitUserModification(int index)
         {
             driver.FindElements(By.Name("entry"))[index]
@@ -219,6 +222,36 @@ namespace AddressBookTests
         return new List<UserData>(userCash);
          }
 
+        internal void AddUserToGroup(UserData user, GroupData group)
+        {
+            manager.Navigator.GoToHomePage();
+            ClearGroupFilter();
+            SelectUser(user.Id);
+            SelectGroupToAdd(group.Name);
+            CommitAddingUserToGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+        private void ClearGroupFilter()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
+        }
+        private void SelectUser(string userId)
+        {
+            driver.FindElement(By.Id(userId)).Click();
+        }
+        private void SelectGroupToAdd(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
+        }
+
+
+        private void CommitAddingUserToGroup()
+        {
+            driver.FindElement(By.Name("add")).Click();
+        }
+
+       
     }
 }
 // public UserHelper RemoveUserViaEdit()

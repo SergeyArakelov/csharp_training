@@ -17,6 +17,7 @@ namespace AddressBookTests
 
         [Column(Name = "id"), PrimaryKey]
         public string Id { get; set; }
+
         [Column(Name = "home")]
         public string HomePhone { get; set; }
         [Column(Name = "mobile")]
@@ -37,6 +38,9 @@ namespace AddressBookTests
         public string SecondName { get; set; }
         [Column(Name = "address")]
         public string Address { get; set; }
+
+        [Column(Name = "deprecated")]
+        public string Deprecated { get; set; }
 
         public string allInfo;
 
@@ -208,7 +212,7 @@ namespace AddressBookTests
         {
             using (AddressBookDB db = new AddressBookDB())
             {
-                return (from u in db.Users select u).ToList();
+                return (from u in db.Users.Where(x => x.Deprecated == "0000-00-00 00:00:00") select u).ToList();
             }
 
         }

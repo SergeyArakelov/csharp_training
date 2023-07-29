@@ -43,17 +43,17 @@ namespace AddressBookTests
         
 
        // [Test, TestCaseSource("UserDataFromXmlFile")]
-        public void CreationUserTest(UserData username)
+        public void CreationUserTest(UserData user)
         {
             
             
 
             List<UserData> oldUsers = UserData.GetAllUsers();
 
-            app.User.Create(username);
+            app.User.Create(user);
 
            List<UserData> newUsers = UserData.GetAllUsers();
-            oldUsers.Add(username);
+            oldUsers.Add(user);
             oldUsers.Sort();
             newUsers.Sort();
             Assert.AreEqual(oldUsers, newUsers);

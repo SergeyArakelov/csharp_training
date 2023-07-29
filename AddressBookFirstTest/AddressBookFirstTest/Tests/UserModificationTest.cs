@@ -13,11 +13,13 @@ namespace AddressBookTests
             {
                 app.User.CreateEmptyUser();
             }
-            UserData modify = new UserData("Vasiliy1","Vasiliev");
+            
 
             //modify.EMail = ("Petrov@mic.com");
             List<UserData> oldUsers = UserData.GetAllUsers();
-            
+            UserData modify = oldUsers[0];
+            modify.FirstName = "Vasiliy1";
+            modify.SecondName = "Vasiliev";
             app.User.Modify(modify);
 
             List<UserData> newUsers = UserData.GetAllUsers();

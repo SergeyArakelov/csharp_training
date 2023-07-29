@@ -14,6 +14,8 @@ class Program
             StreamWriter writer = new StreamWriter(args[1]);
             string format = args[2];
 
+
+
             List<GroupData> groups = new List<GroupData>();
             for (int i = 0; i < count; i++)
             {
